@@ -119,7 +119,7 @@ class Store extends BaseStore {
     // remove trailing slashes
     options.path = (options.path || '').replace(/\/$|\\$/, '')
     let storagePath = this.host + this.pathPrefix
-    let fullPath = this.getTargetDir(storagePath) + options.path
+    let fullPath = options.path
 
     return new Promise(function (resolve, reject) {
       readFile(fullPath, function (err, bytes) {
