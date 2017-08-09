@@ -118,7 +118,6 @@ class Store extends BaseStore {
     options = options || {}
     // remove trailing slashes
     options.path = (options.path || '').replace(/\/$|\\$/, '')
-    let storagePath = this.host + this.pathPrefix
     let fullPath = options.path
 
     return new Promise(function (resolve, reject) {
