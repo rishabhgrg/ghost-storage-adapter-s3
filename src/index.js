@@ -119,11 +119,9 @@ class Store extends BaseStore {
     options = options || {}
     // remove trailing slashes
     options.path = (options.path || '').replace(/\/$|\\$/, '')
-    if (options.path) {
-      requestPromise(options.path).then((file) => {
-        return file
-      })
-    }
+    return requestPromise(options.path).then((file) => {
+      return file
+    })
   }
 }
 
