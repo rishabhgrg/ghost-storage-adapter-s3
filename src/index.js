@@ -119,8 +119,12 @@ class Store extends BaseStore {
     options = options || {}
     // remove trailing slashes
     options.path = (options.path || '').replace(/\/$|\\$/, '')
-    return requestPromise(options.path).then((file) => {
-      return new Buffer(file).toString('base64')
+    let promiseOptions = {
+      url: options.path,
+      encoding: null
+    }
+    return requestPromise(promiseOptions).then((file) => {
+      return file
     })
   }
 }
