@@ -34,7 +34,8 @@
   "dependencies": {
     "aws-sdk": "^2.6.3",
     "bluebird": "^3.4.6",
-    "ghost-storage-base": "0.0.1"
+    "ghost-storage-base": "0.0.1",
+    "request-promise": "^4.2.1"
   },
   "description": "An AWS S3 storage adapter for Ghost 0.10+",
   "devDependencies": {

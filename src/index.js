@@ -3,6 +3,7 @@ import BaseStore from 'ghost-storage-base'
 import { join } from 'path'
 import Promise, { promisify } from 'bluebird'
 import { readFile } from 'fs'
+let requestPromise = require('request-promise')
 
 const readFileAsync = promisify(readFile)
 
@@ -118,14 +119,11 @@ class Store extends BaseStore {
     options = options || {}
     // remove trailing slashes
     options.path = (options.path || '').replace(/\/$|\\$/, '')
-
-    return new Promise((resolve, reject) => {
-      Promise.all([
-        readFileAsync(options.path)
-      ]).then((results) => (
-      resolve(results[0])
-      )).catch(error => reject(error))
-    })
+    if (options.path) {
+      requestPromise(options.path).then((file) => {
+        return file
+      })
+    }
   }
 }
 
