@@ -118,15 +118,13 @@ class Store extends BaseStore {
     options = options || {}
     // remove trailing slashes
     options.path = (options.path || '').replace(/\/$|\\$/, '')
-    let fullPath = options.path
 
-    return new Promise(function (resolve, reject) {
-      readFile(fullPath, function (err, bytes) {
-        if (err) {
-          return reject(err)
-        }
-        resolve(bytes)
-      })
+    return new Promise((resolve, reject) => {
+      Promise.all([
+        readFileAsync(options.path)
+      ]).then((results) => (
+      resolve(results[0])
+      )).catch(error => reject(error))
     })
   }
 }
