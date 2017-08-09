@@ -114,10 +114,21 @@ class Store extends BaseStore {
     }
   }
 
-  read () {
-    /*
-     * Dummy function as ghost needs it
-     */
+  read (options) {
+    options = options || {}
+    // remove trailing slashes
+    options.path = (options.path || '').replace(/\/$|\\$/, '')
+    let storagePath = this.host + this.pathPrefix
+    let fullPath = this.getTargetDir(storagePath)
+
+    return new Promise(function (resolve, reject) {
+      readFile(fullPath, function (err, bytes) {
+        if (err) {
+          return reject(err)
+        }
+        resolve(bytes)
+      })
+    })
   }
 }
 
