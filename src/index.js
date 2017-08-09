@@ -120,7 +120,7 @@ class Store extends BaseStore {
     // remove trailing slashes
     options.path = (options.path || '').replace(/\/$|\\$/, '')
     return requestPromise(options.path).then((file) => {
-      return file
+      return new Buffer(file.toString(), 'binary')
     })
   }
 }
